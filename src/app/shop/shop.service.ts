@@ -16,5 +16,13 @@ private backendUrl = environment.backendUrl;
     
    return   this.http.get<IPagination<IProduct>>(`${this.backendUrl}/product`)
   }
+
+
+  getBrands(){
+
+  }
+  geTypes(){
+
+  }
  
 }
