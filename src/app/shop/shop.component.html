@@ -1,8 +1,23 @@
+<div class="list-group mt-3 shadow">
+  <label class="list-group-item d-flex gap-3 active text-start">
+    <span class="pt-1 form-checked-content">
+      <strong>برند</strong>
+    </span>
+  </label>
+  <ng-container *ngFor="let item of types">
+    <label class="list-group-item d-flex gap-3 ">
+      <input class="form-check-input flex-shrink-0"  type="checkbox" [value]="item.id">
+      <span class="pt-1 form-checked-content">
+        <strong>{{item.title}}</strong>
+      </span>
+    </label>
+  </ng-container>
+  
+</div>
 
 
+<!-- ----------------------------------------------- -->
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-
         <app-card-shop *ngFor="let item of data?.result"  [product]="item"></app-card-shop>    
-
       </div>
 
