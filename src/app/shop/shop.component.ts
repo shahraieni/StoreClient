@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ShopService } from './shop.service';
 import { Subscription } from 'rxjs';
 import { IProduct } from '../shared/models/product';
@@ -12,7 +12,7 @@ import { IType } from '../shared/models/type';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent   implements OnInit, OnDestroy{
-
+  public sidenavOpen :boolean = true;
   public data :IPagination<IProduct>; 
   private sub = new Subscription();
   public  brands :IBrand[];
@@ -21,24 +21,16 @@ export class ShopComponent   implements OnInit, OnDestroy{
   constructor(private shopService:ShopService){}
   
   ngOnInit(): void {
-
     this.GetProducts();    
-    this.getBrands();
-    this.getTypes();
-  
-  }
-  private getTypes() {
-    this.sub.add(this.shopService.geTypes().subscribe(res => {
-      this.types = res;
 
-    }));
   }
-  private getBrands() {
-      this.sub.add(this.shopService.getBrands().subscribe(res => {
-        this.brands = res;
-        
-     }));
+
+
+  @HostListener("window:resize")
+  public onWindowResize(){
+    window.innerWidth <960 ? (this.sidenavOpen = false) : (this.sidenavOpen = true);
   }
+
   private GetProducts() {
     
     this.sub.add(this.shopService.getProduct().subscribe(res => {

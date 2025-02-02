@@ -1,0 +1,34 @@
+     <!-- types -->
+     <div class="w-100 px-1 mb-2">
+        <section class="sticky-top">
+          <div class="list-group shadow">
+            <label class="list-group-item d-flex gap-3 active text-start">
+              <span class="form-checked-content">
+                <strong>نوع</strong>
+              </span>
+            </label>
+            <select class="form-select rounded-bottom rounded-0" >
+              <option [value]="item?.id" *ngFor="let item of types">
+                {{ item?.title }}
+              </option>
+            </select>
+          </div>
+        </section>
+      </div>
+      <!-- brand -->
+      <div class="w-100 px-1 mb-2">
+        <section class="sticky-top">
+          <div class="list-group shadow">
+            <label class="list-group-item d-flex gap-3 active text-start">
+              <span class="form-checked-content">
+                <strong>برند</strong>
+              </span>
+            </label>
+            <select class="form-select rounded-bottom rounded-0">
+              <option [value]="item?.id" *ngFor="let item of brands">
+                {{ item?.title }}
+              </option>
+            </select>
+          </div>
+        </section>
+      </div>

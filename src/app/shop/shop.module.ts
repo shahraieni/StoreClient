@@ -5,11 +5,13 @@ import { ShopRoutingModule } from './shop-routing.module';
 import { ShopComponent } from './shop.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
+import { ShopFiltersComponent } from './shop-filtrrs/shop-filters.component';
 
 
 @NgModule({
   declarations: [
-    ShopComponent
+    ShopComponent,
+    ShopFiltersComponent
   ],
   imports: [
     CommonModule,
