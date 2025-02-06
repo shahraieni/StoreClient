@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { EventEmitter, Injectable, OnInit, Output } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { IPagination } from '../shared/models/pagination';
 import { IProduct } from '../shared/models/product';
@@ -37,8 +37,8 @@ export class ShopService  {
   private generateShopParams() {
     let params = new HttpParams();
     if (this.shopParams.search) params = params.append('search', this.shopParams.search);
-    if (this.shopParams.brandId && this.shopParams.brandId > 0) params = params.append('brandId', this.shopParams.brandId);
-    if (this.shopParams.typeId && this.shopParams.typeId > 0) params = params.append('typeId', this.shopParams.typeId);
+    if (this.shopParams?.brandId && this.shopParams.brandId > 0) params = params.append('brandId', this.shopParams.brandId);
+    if (this.shopParams?.typeId && this.shopParams.typeId > 0) params = params.append('typeId', this.shopParams.typeId);
     params = params.append('pageIndex', this.shopParams.pageIndex);
     params = params.append('pageSize', this.shopParams.pageSize);
     params = params.append('sort', this.shopParams.sort);

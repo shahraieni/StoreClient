@@ -37,7 +37,10 @@ export class ShopComponent   implements OnInit, OnDestroy{
       this.data = res;
     }));
   }
-
+  updateParams(updated:boolean){
+    if(updated)
+      this.GetProducts();
+  }
   ngOnDestroy(): void {
 
     this.sub.unsubscribe();
