@@ -20,17 +20,23 @@ export class ShopService  {
 
   getShopParams(){
     return this.shopParams;
+    //TODO
   }
 
   updateShopParams(params:ShopParams){
       this.shopParams = params;
   }
 
-  getProduct() :Observable<IPagination<IProduct>>{
+  getProducts() :Observable<IPagination<IProduct>>{
   
     let params = this.generateShopParams();
 
    return   this.http.get<IPagination<IProduct>>(`${this.backendUrl}/product`,{params})
+  }
+
+  getProduct(id :number){
+  
+      return this.http.get<IProduct>(`${this.backendUrl}/product/${id}`)
   }
 
 

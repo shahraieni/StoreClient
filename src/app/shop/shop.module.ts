@@ -6,15 +6,19 @@ import { ShopComponent } from './shop.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
 import { ShopFiltersComponent } from './shop-filtrrs/shop-filters.component';
+import { FormsModule } from '@angular/forms';
+import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 
 
 @NgModule({
   declarations: [
     ShopComponent,
-    ShopFiltersComponent
+    ShopFiltersComponent,
+    ShopDetailComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ShopRoutingModule,
     HttpClientModule,
     SharedModule

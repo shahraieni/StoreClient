@@ -8,13 +8,35 @@
 
     <mat-sidenav-content  class="mat-content">
 
-     
+      <div class="row  w-50 mb-3">
+          <form class="d-flex" >
+            <input class="form-control me-2"  #search (keyup.enter)="onSearch()"   type="search" placeholder="جستجو کنید ..." aria-label="Search">
+            <button class="btn btn-outline-success" type="submit"  (click)="onSearch()">جستجو</button>
+            <button class="btn btn-outline-danger  mx-2" type="submit"  (click)="onReset()">حذف</button>
+          </form>
+        </div>
+
+
+
       <div class="row w-100">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-2" *ngFor="let item of data?.result">
           <app-card-shop [product]="item"></app-card-shop>
         </div>
       </div>
-      
+      <div class="row">
+        <div class="col-xs-12 col-12">
+    
+          <pagination [totalItems]="data?.count" 
+          (pageChanged)="onPageChenge($event)"
+           [itemsPerPage]="shopParams.pageSize" 
+            [(ngModel)]="shopParams.pageIndex"
+            previousText="&lsaquo;"
+            nextText="&rsaquo;"
+            firstText="&laquo;"
+            lastText="&raquo;"
+            ></pagination>
+        </div>
+      </div>
     </mat-sidenav-content>
  
 </mat-sidenav-container>
