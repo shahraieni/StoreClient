@@ -4,8 +4,9 @@ import { CardShopComponent } from './components/card-shop/card-shop.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RouterModule } from '@angular/router';
+import {ToastrModule} from "ngx-toastr"
 
-
+import {BreadcrumbModule} from 'xng-breadcrumb'
 
 @NgModule({
   declarations: [
@@ -15,12 +16,22 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     MatSidenavModule,
     PaginationModule,
-    RouterModule
+    BreadcrumbModule,
+    RouterModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      timeOut: 5000
+    })
   ],
   exports:[
     CardShopComponent,
     MatSidenavModule,
-    PaginationModule
+    PaginationModule,
+    ToastrModule,
+    BreadcrumbModule
   ],
 
 })

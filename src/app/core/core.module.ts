@@ -4,6 +4,8 @@ import { FooterComponent } from './layers/footer/footer.component';
 import { NavbarComponent } from './layers/navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import { NotFountComponent } from './layers/not-fount/not-fount.component'
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorHandlingInterceptor } from './interceptors/error-handling.interceptor';
 
 
 
@@ -20,6 +22,13 @@ import { NotFountComponent } from './layers/not-fount/not-fount.component'
   exports:[
     FooterComponent,
     NavbarComponent
+  ],
+  providers:[
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : ErrorHandlingInterceptor,
+      multi :true
+    }
   ]
 })
 export class CoreModule { }

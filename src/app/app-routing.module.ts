@@ -7,13 +7,22 @@ const routes: Routes = [
   {
     path :'',
     title:'صفحه اصلی',
-    loadChildren:()=>import('./home/home.module').then(x=>x.HomeModule)
+    loadChildren:()=>import('./home/home.module').then(x=>x.HomeModule),
+    data:{breadcrumb : 'خانه'}
   },
   {
     path :'shop',
     title:'فروشگاه',
-    loadChildren:()=>import('./shop/shop.module').then(x=>x.ShopModule)
+    loadChildren:()=>import('./shop/shop.module').then(x=>x.ShopModule),
+    data:{breadcrumb : 'محصولات'}
   },
+
+  {
+    path:'notfount' ,
+    title:'صفحه یافت نشد',
+     component:NotFountComponent,
+  },
+  
   {
     path:'**' ,
     title:'صفحه یافت نشد',
