@@ -6,7 +6,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RouterModule } from '@angular/router';
 import {ToastrModule} from "ngx-toastr"
 
-import {BreadcrumbModule} from 'xng-breadcrumb'
+
 
 @NgModule({
   declarations: [
@@ -16,7 +16,6 @@ import {BreadcrumbModule} from 'xng-breadcrumb'
     CommonModule,
     MatSidenavModule,
     PaginationModule,
-    BreadcrumbModule,
     RouterModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
@@ -31,7 +30,6 @@ import {BreadcrumbModule} from 'xng-breadcrumb'
     MatSidenavModule,
     PaginationModule,
     ToastrModule,
-    BreadcrumbModule
   ],
 
 })

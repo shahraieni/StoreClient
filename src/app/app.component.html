@@ -1,15 +1,15 @@
 <app-navbar></app-navbar>
-
-<section>
-    <div  class="d-flex justify-content-between  align-item-center">
-        <xng-breadcrumb></xng-breadcrumb>
-    </div>
-</section>
-
-
 <div class="album py-5 bg-body-tertiary">
     <div class="container-fluid">
+        <ngx-spinner  class="spinner-text">
+            در حال دریافت اطلاعات ...
+        </ngx-spinner>
+        <app-breadcrumb></app-breadcrumb>
         <router-outlet></router-outlet>
      </div> 
 </div>  
 <app-footer></app-footer>
+
+
+
+

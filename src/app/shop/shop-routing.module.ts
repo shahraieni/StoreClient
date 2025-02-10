@@ -4,8 +4,15 @@ import { ShopComponent } from './shop.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 
 const routes: Routes = [
-  {path:'',component:ShopComponent},
-  {path:':id', component:ShopDetailComponent } 
+  {
+    path:'',
+    component:ShopComponent
+  },
+  {
+    path:':id',
+    component:ShopDetailComponent ,
+    data:{breadcrumb : {alias: 'ProductDetil'}}
+  } 
   
 ];
 

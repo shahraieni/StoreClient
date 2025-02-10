@@ -6,6 +6,11 @@ import {RouterModule} from '@angular/router';
 import { NotFountComponent } from './layers/not-fount/not-fount.component'
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorHandlingInterceptor } from './interceptors/error-handling.interceptor';
+import { BreadcrumbComponent } from './layers/breadcrumb/breadcrumb.component';
+import {BreadcrumbModule} from 'xng-breadcrumb'
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
+
 
 
 
@@ -13,20 +18,31 @@ import { ErrorHandlingInterceptor } from './interceptors/error-handling.intercep
   declarations: [
     FooterComponent,
     NavbarComponent,
-    NotFountComponent
+    NotFountComponent,
+    BreadcrumbComponent,
+    
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    BreadcrumbModule,
+    NgxSpinnerModule
   ],
   exports:[
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    BreadcrumbComponent,
+    NgxSpinnerModule
   ],
   providers:[
     {
       provide : HTTP_INTERCEPTORS,
       useClass : ErrorHandlingInterceptor,
+      multi :true
+    },
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : LoadingInterceptor,
       multi :true
     }
   ]
