@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
-import { Basket, IBasket, IBasketItems } from '../shared/models/basket';
+import { Basket, IBasket, IBasketItems, IBasketTotal } from '../shared/models/basket';
 import { HttpClient } from '@angular/common/http';
 import { IProduct } from '../shared/models/product';
 
@@ -13,17 +13,26 @@ export class BasketService {
   private basketItem = new BehaviorSubject<IBasket>(null);
   basketItem$ = this.basketItem.asObservable();
 
-  constructor(private http: HttpClient) { }
+  private totalBasket = new BehaviorSubject<IBasketTotal>(null);
+  totalBasket$ = this.totalBasket.asObservable();
+
+
+  constructor(private http: HttpClient) {
+
+   }
 
   getBasket(id:string){
     return this.http.get<IBasket>(`${this.backendUrl}/basket/${id}`).pipe(map(basket=>{
          this.basketItem.next(basket);
+
+         this.calculateTotale();
          return basket;
     }))
   }
   setBasket(basket : IBasket){
     return this.http.post<IBasket>(`${this.backendUrl}/basket/`,basket).pipe(map(basket=>{
         this.basketItem.next(basket);
+        this.calculateTotale();
         return basket;
     }))
   }
@@ -67,6 +76,17 @@ export class BasketService {
           quantity:quantity,
           type: product.productType
       }
+  }
+
+  private calculateTotale(){
+
+    const basket = this.getCurrentBasketSource();
+    let shipping = 145000;
+    let subTotal = basket.items.reduce((init , item)=>{
+      return item.price * item.quantity + init
+    },0);
+    let total = subTotal + shipping;
+    this.totalBasket.next({shipping:shipping , subTotal:subTotal , total:total})
   }
 
 

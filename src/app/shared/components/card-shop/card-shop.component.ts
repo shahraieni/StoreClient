@@ -18,7 +18,7 @@ export class CardShopComponent implements OnInit {
 
   addItemToBasket(){
     this.basketService.addItemToBasket(this.product).subscribe(res=>{
-      console.log(res)
+     ///console.log(res)
     })
   }
 }

@@ -4,13 +4,15 @@ import { CardShopComponent } from './components/card-shop/card-shop.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RouterModule } from '@angular/router';
-import {ToastrModule} from "ngx-toastr"
+import {ToastrModule} from "ngx-toastr";
+import { OrderTotalComponent } from './components/order-total/order-total.component'
 
 
 
 @NgModule({
   declarations: [
-    CardShopComponent
+    CardShopComponent,
+    OrderTotalComponent
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import {ToastrModule} from "ngx-toastr"
     MatSidenavModule,
     PaginationModule,
     ToastrModule,
+    OrderTotalComponent
   ],
 
 })
