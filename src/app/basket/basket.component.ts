@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BasketService } from './basket.service';
 import { Observable, Subscription } from 'rxjs';
-import { IBasket } from '../shared/models/basket';
+import { IBasket, IBasketItems } from '../shared/models/basket';
 
 @Component({
   selector: 'app-basket',
@@ -16,12 +16,20 @@ sub$ = new  Subscription
   ngOnInit(): void {
     
     this.basket$ = this.baskeService.basketItem$;
-    this.sub$.add(this.basket$.subscribe(t=>{
-      debugger
-    })) 
+   
   }
+
+  increaseItemQuantity(item : IBasketItems){
+      this.baskeService.increaseItemQuantity(item.id).subscribe();
+  }
+
+  decreaseItemQuantity(item : IBasketItems){
+      this.baskeService.decreaseItemQuantity(item.id).subscribe();
+  }
+
+
   ngOnDestroy(): void {
-    this.sub$.unsubscribe();
+    
   }
 
 }

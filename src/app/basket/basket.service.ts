@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, of, retry, tap } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { Basket, IBasket, IBasketItems, IBasketTotal } from '../shared/models/basket';
 import { HttpClient } from '@angular/common/http';
@@ -39,12 +39,60 @@ export class BasketService {
   deleteBasket(id :string){
     //TODO
   }
-
+  getCurrentBasketSource(){
+    return this.basketItem.getValue();
+  }
   addItemToBasket(product:IProduct,quantity=1){
         const itemToAdd :IBasketItems = this.mapPoroductToBasketItem(product,quantity);//ساختن item
         const basket = this.getCurrentBasketSource() ?? this.creatBasket();//بررسی میکنیم که سبد خرید وجود دارد 
         basket.items = this.addOrUpdateBasketItems(itemToAdd,basket.items , quantity);//بررسی میکنیم که itemدر سبد خرید وجود دارد یا نه
        return   this.setBasket(basket);//
+  }
+  deleteItemFromBasket(id :number){
+        if(this.getCurrentBasketSource()){
+            const  basketId = this.getCurrentBasketSource().id;
+            return this.http.delete<IBasket>(`${this.backendUrl}/basket/DeleteItem/${basketId}/${id}`).pipe(
+              tap(res=>{
+                  if(res.items.length === 0){
+                      this.basketItem.next(null);
+                      this.totalBasket.next(null);
+                      localStorage.removeItem(environment.keyLocalStoragBasket)
+                  }else{
+                      this.basketItem.next(res);
+                      this.calculateTotale();
+                  }
+              })
+            );
+        }
+      return of(null) ; 
+  }
+
+  increaseItemQuantity(id :number ){
+      const basket = this.getCurrentBasketSource();
+      const itemIndex = basket.items.findIndex(x=> x.id === id);
+      if(itemIndex != -1){
+        const item = basket.items[itemIndex];
+        item.quantity += 1;
+        return this.setBasket(basket);
+        
+      }
+
+      return of(null) ;
+  }
+
+  decreaseItemQuantity(id :number){
+    const basket = this.getCurrentBasketSource();
+    const itemIndex = basket.items.findIndex(x=> x.id === id);
+    if(itemIndex != -1){
+      const item = basket.items[itemIndex];
+      if(item.quantity > 1){
+        item.quantity--;
+        return this.setBasket(basket)
+      }else{
+          return this.deleteItemFromBasket(item.id);
+      }
+    }
+    return of(null);
   }
 
   private creatBasket(){
@@ -90,7 +138,5 @@ export class BasketService {
   }
 
 
-  getCurrentBasketSource(){
-    return this.basketItem.getValue();
-  }
+  
 }
